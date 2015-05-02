@@ -1,0 +1,38 @@
+import java.util.*;
+
+/**
+ * 
+ * 
+ * @author Kyle Den Hartog
+ * @version 1.0
+ */
+public class MinionCounter
+{
+   public static void main(String args[]){
+       MinionCounter m = new MinionCounter();
+       Scanner sc = new Scanner(System.in);
+       System.out.println("Enter play time - Example 26:10 is 2610");
+       int pTime = sc.nextInt();
+       System.out.println("Enter minion count");
+       int mCount = sc.nextInt(); 
+       int tCS = m.totalCS(pTime,mCount);
+       System.out.println("\nTotal minions possible = " + tCS);
+       float percent = ((float) mCount) / ((float) tCS) * 100;
+       System.out.format("Percent killed = %.2f%n", percent);
+    }
+    
+    public int totalCS(int pTime, int mCount){
+        int wTime = timeConverter(pTime) - 90;
+        int nWaves = wTime/30;
+        System.out.println("Time in seconds: " + wTime);
+        System.out.println("Number of waves: " + nWaves);
+        return ((nWaves/3)*19)+((nWaves%3)*6);
+    }
+    
+    public int timeConverter(int pTime){
+        int mins = pTime/100;
+        int secs = pTime-(mins*100);
+        int tempSec = mins*60;
+        return tempSec + secs;
+    }
+}
